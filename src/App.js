@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import MainPage from './pages/main/mainPage';
+import DNAFactoryPage from './pages/dnaFactory/DNAFactoryPage';
+import strings from './common/strings';
 
+import './App.css';
 function App() {
+  const MAIN = 0;
+  const DNAFACTORY = 1;
+
+  const [currentMenu, setCurrentMenu] = useState(MAIN);
+
+  const handleClickMain = () => {
+    setCurrentMenu(MAIN);
+  };
+
+  const handleClickDNAFactory = () => {
+    setCurrentMenu(DNAFACTORY);
+  };
+
+  const getCurrentPage = (currentMenu) => {
+    switch (currentMenu) {
+      default:
+      case MAIN:
+        return <MainPage />;
+      case DNAFACTORY:
+        return <DNAFactoryPage />;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <div className='menu_bar'>
+        <div
+          className={`menu_button ${currentMenu === MAIN ? 'menu_button__selected' : strings.empty}`}
+          onClick={handleClickMain}
         >
-          Learn React
-        </a>
-      </header>
+          {strings.main}
+        </div>
+        <div
+          className={`menu_button ${currentMenu === DNAFACTORY ? 'menu_button__selected' : strings.empty}`}
+          onClick={handleClickDNAFactory}
+        >
+          {strings.dnaFactory}
+        </div>
+      </div>
+      <div className='page_content'>{getCurrentPage(currentMenu)}</div>
     </div>
   );
 }

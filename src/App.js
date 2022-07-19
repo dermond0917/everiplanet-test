@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import MainPage from './pages/main/mainPage';
 import DNAFactoryPage from './pages/dnaFactory/DNAFactoryPage';
 import strings from './common/strings';
-
 import './App.css';
+
 function App() {
   const MAIN = 0;
   const DNAFACTORY = 1;

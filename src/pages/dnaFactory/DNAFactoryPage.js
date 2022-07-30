@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DNACopy from './dnaCopy/DNACopy';
 import DNAComposition from './dnaComposition/DNAComposition';
+import DNAFactoryInstruction from './DNAFactoryInstruction';
 import strings from '../../common/strings';
 import '../../styles/css/dnaFactory/DNAFactory.css';
 
@@ -9,6 +10,7 @@ const DNAFactoryPage = () => {
   const COMPOSITION = 1;
 
   const [currentTab, setCurrentTab] = useState(COPY);
+  const [instructionOpen, setInstructionOpen] = useState(false);
 
   const handleClickCopy = () => {
     setCurrentTab(COPY);
@@ -17,6 +19,14 @@ const DNAFactoryPage = () => {
   const handleClickComposition = () => {
     setCurrentTab(COMPOSITION);
   };
+
+  const openInstruction = () =>{
+    setInstructionOpen(true);
+  }
+
+  const closeInstruction = () =>{
+    setInstructionOpen(false);
+  }
 
   const getCurrentContent = () => {
     switch (currentTab) {
@@ -27,13 +37,16 @@ const DNAFactoryPage = () => {
         return <DNAComposition />;
     }
   };
+
   return (
+    <div>
     <div className='dna_factory_frame'>
+      
       <div className='dna_factory_header'>
         <div className='dna_factory_title'>
           <div className='dna_factory_title_text'>
             {strings.dnaFactory}
-            <div className='dna_factory_title_help_box'>
+            <div className='dna_factory_title_help_box' onClick={openInstruction}>
               <div className='dna_factory_title_help'>{strings.questionMark}</div>
             </div>
           </div>
@@ -61,6 +74,10 @@ const DNAFactoryPage = () => {
         </div>
         <div className='dna_factory_content'>{getCurrentContent()}</div>
       </div>
+    </div>
+    <DNAFactoryInstruction open={instructionOpen} close = {closeInstruction} header="Modal heading">
+        plzz
+      </DNAFactoryInstruction>
     </div>
   );
 };

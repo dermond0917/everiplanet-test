@@ -8,4 +8,5 @@ export default {
   questionMark: '?',
   energy: 'Energy',
   myDNAs: 'My DNAs',
+  howToPlay: 'HOW TO PLAY'
 };
